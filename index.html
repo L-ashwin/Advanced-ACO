@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ACO Feature Selection</title>
+    <style>
+      h1{
+        text-align: center;
+        text-transform: uppercase;
+      }
+      td,th{
+        margin:5px;
+        text-align:center;
+      }
+      img{
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 50%;
+      }
+      .right h2{
+        text-align: right;
+        font-size: 100%;
+      }
+
+    </style>
+  </head>
+  <body>
+      <h1>An Improved Ant Colony Optimization with Correlation and GINI Importance</h1>
+      <aside class="right">
+        <h2>Dr. Jayaraman Valadi <br>valadi@gmail.com <br> jayaraman.vk@flame.edu.in </h2>
+        <h2>Ashwin Lahorkar <br> asblahorkar@gmail.com <br> ashwin.lahorkar@cms.unipune.ac.in </h2>
+      </aside>
+    <section class="Abstract">
+      <h2>Abstract:</h2>
+      <p>
+          Accurate classification of example depend upon identification of informative attributes and removal of redundant attributes.  Attribute selection helps reducing the noise and increase classification accuracy. In disease prediction problems, feature selection facilitates identification of biomarker attributes thereby facilitating valuable domain information. In this project we have employed a synergistic filter-wrapper methodology for simultaneous classification and attribute selection. ACO employs correlation and Gini ranking information along with pheromone learning, for providing better and better attributes as iterations proceed. The robust random forest classifier employed classifies the data to maximize fivefold accuracy. We evaluated the performance of our algorithm with several data sets in bioinformatics domain and found the performance of the software ants comparing very well with earlier algorithms.
+      </p>
+    </section>
+
+    <section class="Introduction">
+      <h2>Introduction:</h2>
+      <p><!-- NOTE: Write here -->
+          Feature selection is very relevant and important in problems arising in computational biology and bioinformatics.  For protein function annotation a compendium of features in the form of domain information is available and only a few attributes are important that correlate with the concerned classification problem. In cancer detection with microarray expression profiles of patients and normal patients we are provided with thousands of features and a very small subset of genes are important. In drug design and quantitative structure activity relationship modelling we have tens of thousands of descriptors in the form of different dimensional attributes. A rational methodology is therefore important for obtaining the informative subset of attributes.  In protein function classification tasks extraction is relevant and important in rational design of drugs. Irrelevant features not correlating to class prediction may interfere with the process of learning and can considerably degrade the training and generalization performance. Hence it is important to remove the redundant data to increase the performance of the learning system. Filter and wrapper class of methods are normally used for attribute selection. Filter methods like correlation filter, mutual information and Gini ranking are based on heuristics and can be readily obtained. While they are fast, they can be providing inaccurate information.  Wrapper methods require repeated use of classifiers to select attributes. Recently swarm intelligence-based methods are becoming increasingly popular for solving several real-life optimization problems in different domains of science and engineering. Ant colony optimization originally introduced by Dorigo and Co-workers is a swarm-based method. This algorithm is based on real life foraging behavior of ants. The computational algorithms mimic the pheromone mediated search behavior of real-life ants. Some genre of ants deposit pheromone on their path from food source to the nest and back. They also get attracted to the pheromone rich trails. This property leads to more and more ants choosing optimal route and the establishment of ant highways. The algorithm proposed here employs a hybrid wrapper- filter methodology for feature selection. Feature heuristics information is obtained by Random Forest Gini and  Pearson Correlation between attributes. Most informative subset is then iteratively found out by judiciously combining the ranking information and pheromone mediated search capabilities of artificial ant colony algorithm. At every generation, the subsets are evaluated by employing random forest classification.
+      </p>
+    </section>
+
+    <section class="Algorithm">
+      <h2>Algorithm:</h2>
+
+      <p><!-- NOTE: Write here -->
+          Random forest (RF) is an ensemble of randomly constructed independent (and unpruned, i.e. fully grown) decision trees [Breiman]. It uses bootstrap sampling technique, which is an improved version of bagging. It is better than bagging and is comparable to boosting in terms of accuracy, but computationally much faster and more robust with respect to over-fitting noise than boosting and other tree ensemble techniques. Randomness is introduced into the RF algorithm in two ways: one in the sample dataset for growing the tree and the other in the choice of the subset of attributes for node splitting while growing each tree. Such a RF is grown in the following manner: For each tree, a Bootstrap sample (with replacement) is drawn from the original training data set. Pruning is not necessary in RF since bootstrap sampling takes care of the over fitting problem. This further reduces the computational load of the RF algorithm. After all the trees are grown, the kth tree classifies the instances that are OOB for that tree (left out by the kth tree). In this manner, each case is classified by about one third of the trees. A majority voting strategy is then employed to decide on the class affiliation of each case. The proportion of times that the voted class is not equal to the true class of case- ‘n’, averaged over all the cases in the training data set is called as the OOB error estimate. Now after growing the forest, if an unseen validation test dataset is given for classification, each tree in the random forest casts a unit vote for the most popular class in the test data. The output of the classifier is determined by a majority vote of the trees. The classification error rate of the forest depends on the strength of each tree and the correlation between any two trees in the forest. The key to accuracy is to keep low bias and low correlation among the trees. Random Forest can also be used to get an estimate of the variables that are important for classification. The weighted average of Gini reduction of a given variables at different nodes in a tree and at different trees provide quantitative information about Gini Importance.
+      </p>
+
+      <p><!-- NOTE: Write here -->
+          Several authors have employed ACO for feature selection(references). Recently Kashef and Nezambadipour employed an advanced version of binary ACO incorporating correlation between features. Our modified and improved algorithm employs a synergistic combination of Correlation and Random Forest Gini importance, probabilistically employed as heuristics.
+      </p>
+
+      <p><!-- NOTE: Write here -->
+          A modified version of the Binary Ant Colony Optimization algorithm is developed for feature selection.  In Ant Colony Optimization technic for feature selection, features are considered as nodes of a graph and there is a link between all nodes. Ants start from a random node then depending on the weight of the links Ant moves to the next node, it stops after a predetermined number of hops. All the nodes traversed by the ant are selected. After all Ants finish traversing route, performance is analyzed for each selection of attributes. The best performing ant is rewarded by increasing the Pheromone level on all the links traversed by that Ant.
+      </p>
+
+      <p><!-- NOTE: Write here -->
+          In BACO each attribute is assumed to have one of two states 0 and 1, hence the name Binary ACO. State 1 indicates that the feature corresponding to that state is selected while 0 indicates the feature is not selected. Now if we assume features as the nodes of a graph, between any two nodes four different types of links are possible. For example, say i and j are two nodes then, i0- j0, i0- j1, i1- j0, and i1- j1 are four different links representing different combinations of a selection of i and j. Unlike in classic ACO in this algorithm ants traverse all the attributes. Finally, we get a vector of 1s and 0s of length equal to the number of attributes along with list of attributes in order of traversal.
+      </p>
+
+      <p><!-- NOTE: Write here -->
+          In this study, we also generate Heuristic Importance scores for each link which along with the Pheromone value is used to decide the next move for the ant. Three different methods [5] to generate Heuristics importance of link based on Correlation matrix and relevance vector are used. We have used normalized GINI importance of attributes as relevance vector.
+      </p>
+
+      <div><!-- NOTE: Write here -->
+          <ol>
+            <li>
+                Initialization <br>
+                Algorithm parameters are set. For Heuristics information Correlation matrix and relevance vector are generated
+            </li>
+
+            <li>
+                Generating ants and the feature subset <br>
+                First ants are randomly assigned a node and a state. Then before each hop set of unvisited nodes is considered, the weight of the link to next hop is computed based on the pheromone level on that link and the importance of the next attribute. For each attribute, there are two different links possible from the current position of the Ant. The next attribute is either selected (link to 1 is selected) for not selected (link to 0 is selected). Weight of selection link is computed as the product of pheromone and feature importance score, while the weight of non-selection link is computed as a product if pheromone and [1 - feature importance score]. This way of computing the link weight increases the probability of selection of important attributes and reduces that for less important attributes.
+                An Exploration-Exploitation parameter is set during initialization depending on which, method to choose the next node and state is decided.
+                  <ul>
+                    <li>
+                      Exploitation - In case of exploitation, the highest weighted link is chosen as the next move for the Ant.
+                    </li>
+                    <li>
+                      Exploration - In the case of exploration, random selection is done from a probability distribution. The probability of selection of each link is proportional to its weight.
+                    </li>
+                  </ul>
+            </li>
+
+            <li>
+              Performance Measure <br>
+              Classification is done based on the selected attributes by each ant and accuracy is computed by 5-fold cross-validation. But along with maximizing the accuracy, another objective is to minimize the redundancy in attributes, for this, a modified performance measure is used. The performance measure is evaluated for each ant.
+            </li>
+
+            <li>
+              Updating the Pheromone matrix <br>
+              Only the ant with the best performance measure value is rewarded by increasing the pheromone level on each of the links traversed by that ant, other links are punished by reducing the pheromone.
+            </li>
+
+            <li>
+              The above steps are repeated till the stopping criteria is reached. <br>
+              This experiment is repeated multiple times to get statistical information about the results.
+            </li>
+          </ol>
+      </div>
+
+      <figure>
+        <img src="./algo.jpg" alt="algorithm">
+      </figure>
+    </section>
+
+    <section class="result">
+      <h2>Result:</h2>
+<table>
+  <tr>
+    <th>Dataset</th>
+    <th>Average Accuracy</th>
+    <th>Average Number of attributes</th>
+  </tr>
+  <tr>
+    <td>Wine Dataset</td>
+    <td>97.9968</td>
+    <td>8.6</td>
+  </tr>
+  <tr>
+    <td>Breast Cancer </td>
+    <td>97.0849</td>
+    <td>9.2</td>
+  </tr>
+  <tr>
+    <td>Biodegradation</td>
+    <td>86.0664</td>
+    <td>20.2</td>
+  </tr>
+  <tr>
+    <td>Dermatology</td>
+    <td>96.8352</td>
+    <td>18.6</td>
+  </tr>
+
+
+</table>
+    </section>
+
+    <section class="References">
+      <h2>References:</h2>
+      <div><!-- NOTE: Write here -->
+        <ol>
+          <li>
+              Dorigo M, Di Caro G. Ant colony optimization: a new meta-heuristic. InProceedings of the 1999 congress on evolutionary computation-CEC99 (Cat. No. 99TH8406) 1999 Jul 6 (Vol. 2, pp. 1470-1477). IEEE.
+          </li>
+
+          <li>
+              Breiman L. Random forests. Machine learning. 2001 Oct 1;45(1):5-32.
+          </li>
+
+          <li>
+              Patil D, Raj R, Shingade P, Kulkarni B, Jayaraman VK. Feature selection and classification employing hybrid ant colony optimization/random forest methodology. Combinatorial chemistry & high throughput screening. 2009 Jun 1;12(5):507-13.
+          </li>
+
+          <li>
+              Sharma S, Ghosh S, Anantharaman N, Jayaraman VK. Simultaneous informative gene extraction and cancer classification using aco-antminer and aco-random forests. InProceedings of the International Conference on Information Systems Design and Intelligent Applications 2012 (INDIA 2012) held in Visakhapatnam, India, January 2012 2012 (pp. 755-761). Springer, Berlin, Heidelberg.
+          </li>
+
+          <li>
+              Kashef S, Nezamabadi-pour H. An advanced ACO algorithm for feature subset selection. Neurocomputing. 2015 Jan 5;147:271-9.
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    </body>
+</html>
